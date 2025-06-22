@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.*;
@@ -86,7 +85,6 @@ public class ControllerExcel {
         updateCounts();
         fileNameLabel.setText("Ninguno seleccionado");
     }
-
     private void loadExcelFile(File file) {
         try (FileInputStream fis = new FileInputStream(file)) {
             Workbook workbook;
@@ -96,13 +94,10 @@ public class ControllerExcel {
             } else {
                 workbook = new HSSFWorkbook(fis);
             }
-
             Sheet sheet = workbook.getSheetAt(0);
             data.clear();
             columnNames.clear();
             tableView.getColumns().clear();
-
-            // Read headers
             Row headerRow = sheet.getRow(0);
             if (headerRow != null) {
                 for (int i = 0; i < headerRow.getLastCellNum(); i++) {
@@ -122,8 +117,6 @@ public class ControllerExcel {
                     tableView.getColumns().add(column);
                 }
             }
-
-            // Read data rows
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);
                 if (row != null) {
@@ -154,14 +147,11 @@ public class ControllerExcel {
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("Datos");
 
-            // Write headers
             Row headerRow = sheet.createRow(0);
             for (int i = 0; i < columnNames.size(); i++) {
                 org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
                 cell.setCellValue(columnNames.get(i));
             }
-
-            // Write data
             for (int i = 0; i < data.size(); i++) {
                 Row row = sheet.createRow(i + 1);
                 ObservableList<String> rowData = data.get(i);
@@ -170,8 +160,6 @@ public class ControllerExcel {
                     cell.setCellValue(rowData.get(j));
                 }
             }
-
-            // Auto-size columns
             for (int i = 0; i < columnNames.size(); i++) {
                 sheet.autoSizeColumn(i);
             }

@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.5.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>pe.edu.upeu.excel</groupId>
 	<artifactId>Excel</artifactId>
@@ -44,8 +44,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- JavaFX Dependencies -->
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
@@ -66,8 +64,6 @@
 			<artifactId>javafx-base</artifactId>
 			<version>${javafx.version}</version>
 		</dependency>
-
-		<!-- Apache POI for Excel handling -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
